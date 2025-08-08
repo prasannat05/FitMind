@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Profile | FitMind{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-header fs-5 fw-bold">👤 Profile Settings</div>
+      <div class="card-body">
+        <form method="POST" novalidate>
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" name="age" id="age" class="form-control" value="{{ user.age or '' }}" min="0" required />
+          </div>
+          <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select name="gender" id="gender" class="form-select" required>
+              <option value="">Select Gender</option>
+              <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+              <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
+              <option value="Other" {% if user.gender == 'Other' %}selected{% endif %}>Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="weight" class="form-label">Weight (kg)</label>
+            <input type="number" name="weight" id="weight" step="0.1" min="0" class="form-control" value="{{ user.weight or '' }}" />
+          </div>
+          <div class="mb-3">
+            <label for="goals" class="form-label">Fitness Goals</label>
+            <textarea name="goals" id="goals" rows="3" class="form-control" placeholder="E.g., weight loss, muscle gain, stay fit">{{ user.goals or '' }}</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Save Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
